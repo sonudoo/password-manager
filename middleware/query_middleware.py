@@ -11,8 +11,8 @@ def validate_query_request(dbclient):
         def wrap(*args, **kwargs):
             valid, message = QueryRequestValidator(request, dbclient).isValid()
             if not valid:
-                abort(INVALID_REQUEST_RESPONSE_CODE, '{}\n{}\nOR\n{}'.format(
-                    message, VALID_SEARCH_QUERY_TYPE_COMMAND, VALID_GET_SECRETS_QUERY_TYPE_COMMAND))
+                return '{}\n{}\nOR\n{}'.format(
+                    message, VALID_SEARCH_QUERY_TYPE_COMMAND, VALID_GET_SECRETS_QUERY_TYPE_COMMAND), INVALID_REQUEST_RESPONSE_CODE
             else:
                 return f(*args, **kwargs)
         return wrap

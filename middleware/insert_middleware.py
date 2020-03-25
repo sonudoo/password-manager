@@ -12,8 +12,7 @@ def validate_insert_request(dbclient):
             valid, message = InsertRequestValidator(
                 request, dbclient).isValid()
             if not valid:
-                abort(INVALID_REQUEST_RESPONSE_CODE,
-                      '{}\n{}'.format(message, VALID_INSERT_COMMAND))
+                return '{}\n{}'.format(message, VALID_INSERT_COMMAND), INVALID_REQUEST_RESPONSE_CODE
             else:
                 return f(*args, **kwargs)
         return wrap
