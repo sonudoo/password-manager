@@ -12,8 +12,7 @@ def validate_update_request(dbclient):
             valid, message = UpdateRequestValidator(
                 request, dbclient).isValid()
             if not valid:
-                abort(INVALID_REQUEST_RESPONSE_CODE,
-                      '{}\n{}'.format(message, VALID_UPDATE_COMMAND))
+                return '{}\n{}'.format(message, VALID_UPDATE_COMMAND), INVALID_REQUEST_RESPONSE_CODE
             else:
                 return f(*args, **kwargs)
         return wrap
